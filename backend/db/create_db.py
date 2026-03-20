@@ -26,12 +26,20 @@ class Rezept(Base):
     zutaten = Column(ARRAY(Text))
     schritte = Column(ARRAY(Text))
     
-    # Array für Binärdaten (Bilder)
+    # Array für S3 (Bilder)
     bilder = Column(ARRAY(Text))
     
     # Fremdschlüssel: "Jedes Rezept ist in genau einem Album"
     album_id = Column(Integer, ForeignKey('alben.id'), nullable=False)
     album = relationship("Album", back_populates="rezepte")
+
+class User(Base):
+    __tablename__ = 'user'
+    
+    id = Column(Integer, primary_key=True)
+    vorname = Column(Text, nullable=False)
+    email = Column(Text, nullable=False)
+
 
 def create_tables():
     try:
