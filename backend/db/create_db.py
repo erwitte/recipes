@@ -37,7 +37,6 @@ def create_tables():
     try:
         engine = create_engine('postgresql://user:password@localhost/recipes')
         Base.metadata.create_all(engine)
-        print("Tables created successfully.")
     except Exception as e:
         print(f"Error creating tables: {e}")
 
