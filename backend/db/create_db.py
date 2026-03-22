@@ -1,9 +1,19 @@
 from sqlalchemy import Column, Integer, String, Text, LargeBinary, ForeignKey
 from sqlalchemy.dialects.postgresql import ARRAY
-from sqlalchemy.orm import relationship, declarative_base
+from sqlalchemy.orm import relationship, declarative_base, sessionmaker
 from sqlalchemy import create_engine
 
 Base = declarative_base()
+
+engine = create_engine('postgresql://user:password@localhost/recipes')
+SessionLocal = sessionmaker(bind=engine)
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 class Album(Base):
     __tablename__ = 'alben'
@@ -43,7 +53,6 @@ class User(Base):
 
 def create_tables():
     try:
-        engine = create_engine('postgresql://user:password@localhost/recipes')
         Base.metadata.create_all(engine)
     except Exception as e:
         print(f"Error creating tables: {e}")
