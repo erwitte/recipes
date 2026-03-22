@@ -1,9 +1,8 @@
 from fastapi import FastAPI, Depends
 from contextlib import asynccontextmanager
 from sqlalchemy.orm import Session
-from db.create_db import get_db
-from db.create_db import Album as AlbumModel, Rezept as RezeptModel, User as UserModel
-from db.create_db import create_tables
+from db.create_db import get_db, create_tables
+from db.models import Album as AlbumModel, Rezept as RezeptModel, User as UserModel
 from dtos import *
 
 @asynccontextmanager
