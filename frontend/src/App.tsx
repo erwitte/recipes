@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Register from './routes/Register'
 
 import './index.css'
 
@@ -10,7 +11,7 @@ function App() {
      <div>
       <Routes>
         <Route path="/" />
-        <Route path="/register" />
+        <Route path="/register" element={<Register />} />
         <Route path="/home" />
       </Routes>
      </div>
