@@ -19,7 +19,7 @@ class Album(BaseModel):
 class AlbumOut(BaseModel):
     id: int
     name: str
-    rezepte: List[RezeptOut] = [] # Verschachtelte DTOs!
+    rezepte: List[RezeptOut] = []
     
     model_config = ConfigDict(from_attributes=True)
 

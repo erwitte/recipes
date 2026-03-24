@@ -1,16 +1,20 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import './index.css'
 
 function App() {
 
   return (
     <>
-     <div className="min-h-screen 
-                      w-full 
-                      bg-slate-950 
-                      flex 
-                      justify-center 
-                      items-center
-                      red-500">sup</div>  
+     <BrowserRouter>
+     <div>
+      <Routes>
+        <Route path="/" />
+        <Route path="/register" />
+        <Route path="/home" />
+      </Routes>
+     </div>
+     </BrowserRouter>
     </>
   )
 }
