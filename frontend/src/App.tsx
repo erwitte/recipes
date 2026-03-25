@@ -8,12 +8,9 @@ function App() {
   return (
     <>
      <BrowserRouter>
-     <div className="min-h-screen 
-                      w-full 
-                      bg-slate-950 
-                      flex 
-                      justify-center 
-                      items-center">
+     <div 
+  className="absolute inset-0 bg-[url(https://images.pexels.com/photos/14853728/pexels-photo-14853728.jpeg)] bg-[length:100%] bg-center bg-no-repeat"
+>
       <Routes>
         <Route path="/" element={<Login />}/>
         <Route path="/register" element={<Register />} />
