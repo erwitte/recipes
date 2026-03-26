@@ -1,4 +1,5 @@
 import { useState } from "react";
+import clsx from "clsx";
 
 function Register(){
     const [firsNname, setFirstName] = useState("");
@@ -31,8 +32,12 @@ function Register(){
             checkPasswords(repeatedPassword)
         }}
         className="border border-black rounded-l"/>
-        <p className={`text-red-500 text-sm mt-1 transition-opacity duration-300 ${passwordError ? "opacity-100" : "opacity-0"}`}>Passwörter nicht gleich</p>
-
+            <p className={clsx(
+            "text-red-500 text-sm mt-1 transition-opacity",
+            passwordError ? "opacity-100" : "opacity-0"
+            )}>
+                Passwörter nicht gleich
+            </p>
         <button onClick={() => console.log(firsNname, email, password)}></button>
         </>
     )
