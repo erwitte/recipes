@@ -16,7 +16,8 @@ function Register(){
     }
 
     return(
-        <>
+        <div className="flex flex-col gap-4 w-full max-w-sm">
+            <h2 className="text-2xl font-bold text-gray-800 text-center mb-2">Registrierung</h2>
         <span>Vorname: </span>
         <input placeholder="Vorname eingeben..." type="text" onChange={(e) => setFirstName(e.target.value)}
         className="border border-black rounded-l"/>
@@ -39,7 +40,7 @@ function Register(){
                 Passwörter nicht gleich
             </p>
         <button onClick={() => console.log(firsNname, email, password)}></button>
-        </>
+        </div>
     )
 }
 
