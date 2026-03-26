@@ -1,5 +1,6 @@
 import { useState } from "react";
 import clsx from "clsx";
+import ActionButton from "./components/ActionButton";
 
 function Register(){
     const [firsNname, setFirstName] = useState("");
@@ -50,7 +51,8 @@ function Register(){
             )}>
                 Passwörter nicht gleich
             </p>
-        <button onClick={() => console.log(firsNname, email, password)}></button>
+
+        <ActionButton onClick={() => console.log(firsNname, email, password)}>Registrieren</ActionButton>
         </div>
     )
 }
