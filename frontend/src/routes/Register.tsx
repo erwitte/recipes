@@ -1,12 +1,14 @@
 import { useState } from "react";
 import clsx from "clsx";
 import ActionButton from "./components/ActionButton";
+import { useNavigate } from "react-router-dom";
 
 function Register(){
     const [firsNname, setFirstName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordError, setPasswordError] = useState("");
+    const navigate = useNavigate();
 
     function checkPasswords(repeatedPassword: string){
         if (password !== repeatedPassword){
@@ -51,8 +53,11 @@ function Register(){
             )}>
                 Passwörter nicht gleich
             </p>
-
-        <ActionButton onClick={() => console.log(firsNname, email, password)}>Registrieren</ActionButton>
+            
+        <div className="flex gap-6 justify-center">
+            <ActionButton onClick={() => navigate("/")}>Zurück</ActionButton>
+            <ActionButton onClick={() => console.log(firsNname, email, password)}>Registrieren</ActionButton>
+        </div>
         </div>
     )
 }
