@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from db.create_db import get_db, create_tables
 from db.models import Album as AlbumModel, Rezept as RezeptModel, User as UserModel
 from dtos import *
+from fastapi.middleware.cors import CORSMiddleware
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -14,17 +15,50 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
-@app.post("/album",response_model=AlbumOut)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows GET, POST, PUT, DELETE, etc.
+    allow_headers=["*"],  # Allows all headers (Content-Type, Authorization, etc.)
+)
+
+@app.post("/album",response_model=List[AlbumOut])
 def create_album(album: Album, db: Session = Depends(get_db)):
-    try:
-        db_album = AlbumModel(name=album.titel)
-        db.add(db_album)
-        db.commit()
-        db.refresh(db_album)
-        return db_album
-    except Exception as e:
-        print(e)
-        return None
+    dummy_albums = [
+        {
+            "id": 1, 
+            "name": "Discovery", 
+            "image_url": "https://via.placeholder.com/150", 
+            "link": "https://example.com/1"
+        },
+        {
+            "id": 2, 
+            "name": "Random Access Memories", 
+            "image_url": "https://via.placeholder.com/150", 
+            "link": "https://example.com/2"
+        }
+    ]
+    return dummy_albums
+
+@app.get("/collection", response_model=List[AlbumOut])
+def get_collection(db: Session = Depends(get_db)):
+    dummy_albums = [
+        {
+            "id": 1, 
+            "name": "Discovery", 
+            "image_url": "https://via.placeholder.com/150", 
+            "link": "https://example.com/1"
+        },
+        {
+            "id": 2, 
+            "name": "Random Access Memories", 
+            "image_url": "https://via.placeholder.com/150", 
+            "link": "https://example.com/2"
+        }
+    ]
+    return dummy_albums
+
 
 @app.post("/register", response_model=User)
 def register(user: User, db: Session = Depends(get_db)):

@@ -19,7 +19,8 @@ class Album(BaseModel):
 class AlbumOut(BaseModel):
     id: int
     name: str
-    rezepte: List[RezeptOut] = []
+    image_url: str
+    link: str
     
     model_config = ConfigDict(from_attributes=True)
 
