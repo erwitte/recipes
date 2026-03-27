@@ -8,7 +8,7 @@ class Album(Base):
     __tablename__ = 'alben'
     
     id = Column(Integer, primary_key=True)
-    name = Column(Text, nullable=False)
+    title = Column(Text, nullable=False)
     image_url = Column(Text, nullable=True)
     
     # "Ein Album hält X Rezepte" (One-to-Many)

@@ -14,7 +14,7 @@ class RezeptOut(Rezept):
 
 
 class Album(BaseModel):
-    titel: str = Field(..., min_length=1, max_length=255)
+    title: str = Field(..., min_length=1, max_length=255)
     image_url: str
 
 

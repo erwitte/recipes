@@ -26,7 +26,7 @@ app.add_middleware(
 @app.post("/album")
 def create_album(album: Album, db: Session = Depends(get_db)):
     try:
-        db_album = AlbumModel(name=album.titel, image_url=album.image_url)
+        db_album = AlbumModel(title=album.title, image_url=album.image_url)
         db.add(db_album)
         db.commit()
         db.refresh(db_album)
@@ -35,23 +35,14 @@ def create_album(album: Album, db: Session = Depends(get_db)):
         print(e)
 
 
-@app.get("/collection", response_model=List[AlbumOut])
-def get_collection(db: Session = Depends(get_db)):
-    dummy_albums = [
-        {
-            "id": 1, 
-            "name": "Discovery", 
-            "image_url": "https://via.placeholder.com/150", 
-            "link": "https://example.com/1"
-        },
-        {
-            "id": 2, 
-            "name": "Random Access Memories", 
-            "image_url": "https://via.placeholder.com/150", 
-            "link": "https://example.com/2"
-        }
-    ]
-    return dummy_albums
+@app.get("/album", response_model=List[AlbumOut])
+def get_all_albums(db: Session = Depends(get_db)):
+    try:
+        albums = db.query(AlbumModel).all()
+        return albums
+    except Exception as e:
+        print(e)
+        return None
 
 
 @app.post("/register", response_model=User)
