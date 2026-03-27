@@ -19,11 +19,12 @@ function Home(){
     
 
     return (
-        <ul>
+        <div className="w-full h-full flex flex-wrap gap-4 self-start">
             {albums.map(album => (
-                <li key={album.id}>{album.title}</li>
-            ))}
-        </ul>
+                <div key={album.id}>
+                    <span>{album.title}</span>
+            </div>))}
+        </div>
     )
 }
 
