@@ -15,12 +15,11 @@ class RezeptOut(Rezept):
 
 class Album(BaseModel):
     titel: str = Field(..., min_length=1, max_length=255)
-
-class AlbumOut(BaseModel):
-    id: int
-    name: str
     image_url: str
-    link: str
+
+
+class AlbumOut(Album):
+    id: int
     
     model_config = ConfigDict(from_attributes=True)
 

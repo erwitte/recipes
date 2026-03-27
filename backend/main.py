@@ -23,7 +23,7 @@ app.add_middleware(
     allow_headers=["*"],  # Allows all headers (Content-Type, Authorization, etc.)
 )
 
-@app.post("/album",response_model=List[AlbumOut])
+@app.post("/album")
 def create_album(album: Album, db: Session = Depends(get_db)):
     dummy_albums = [
         {
