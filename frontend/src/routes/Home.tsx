@@ -1,27 +1,27 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-type Collection = {
+type Album = {
     id: number,
-    name: string,
+    title: string,
     image_url: string,
 }
 
 
 function Home(){
-    const [collections, setCollections] = useState<Collection[]>([])
+    const [albums, setAlbums] = useState<Album[]>([])
 
     useEffect(() => {
-        axios.get<Collection[]>("http://localhost:8000/collection")
-        .then(response => setCollections(response.data))
+        axios.get<Album[]>("http://localhost:8000/album")
+        .then(response => setAlbums(response.data))
         .catch(error => console.error(error));
     }, []);
     
 
     return (
         <ul>
-            {collections.map(collection => (
-                <li key={collection.id}>{collection.name}</li>
+            {albums.map(album => (
+                <li key={album.id}>{album.title}</li>
             ))}
         </ul>
     )
