@@ -5,7 +5,6 @@ type Collection = {
     id: number,
     name: string,
     image_url: string,
-    link: string
 }
 
 
@@ -22,7 +21,7 @@ function Home(){
     return (
         <ul>
             {collections.map(collection => (
-                <li key={collection.id}><a href={collection.link}>{collection.name}</a></li>
+                <li key={collection.id}>{collection.name}</li>
             ))}
         </ul>
     )

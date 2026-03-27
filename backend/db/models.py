@@ -9,6 +9,7 @@ class Album(Base):
     
     id = Column(Integer, primary_key=True)
     name = Column(Text, nullable=False)
+    image_url = Column(Text, nullable=True)
     
     # "Ein Album hält X Rezepte" (One-to-Many)
     # cascade="all, delete-orphan" sorgt dafür, dass Rezepte gelöscht werden, 
