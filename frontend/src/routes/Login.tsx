@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ActionButton from "./components/ActionButton";
+import ActionButton from "../components/ActionButton";
 import { useNavigate } from 'react-router-dom';
 
 function Login(){

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import clsx from "clsx";
-import ActionButton from "./components/ActionButton";
+import ActionButton from "../components/ActionButton";
 import { useNavigate } from "react-router-dom";
 
 function Register(){
