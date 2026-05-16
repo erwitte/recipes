@@ -28,7 +28,7 @@ function App() {
                 }
               />
               <Route 
-                path="/register" 
+                path="/register/*" 
                 element={
                   <SignedOut>
                     <Register />
