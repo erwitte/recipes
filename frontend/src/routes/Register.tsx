@@ -8,7 +8,7 @@ function Register(){
     const [firstName, setFirstName] = useState(""); // Fixed typo
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [passwordError, setPasswordError] = useState("");
+    const [passwordError, setPasswordError] = useState("")
     
     // 1. Added missing states for Clerk's OTP step and error messages
     const [pendingVerification, setPendingVerification] = useState(false);
@@ -63,7 +63,7 @@ function Register(){
                 
                 <label className="flex flex-col gap-1">
                     <span>Bestätigungscode:</span>
-                    <input placeholder="Code eingeben..." value="" autoComplete="one-time-code" onChange={(e) => setCode(e.target.value)}
+                    <input placeholder="Code eingeben..." value={code} autoComplete="one-time-code" onChange={(e) => setCode(e.target.value)}
                     className="border border-black rounded-l p-2"/>
                 </label>
 
