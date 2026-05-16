@@ -63,7 +63,7 @@ function Register(){
                 
                 <label className="flex flex-col gap-1">
                     <span>Bestätigungscode:</span>
-                    <input placeholder="Code eingeben..." type="text" autoComplete="new-password" onChange={(e) => setCode(e.target.value)}
+                    <input placeholder="Code eingeben..." value="" autoComplete="one-time-code" onChange={(e) => setCode(e.target.value)}
                     className="border border-black rounded-l p-2"/>
                 </label>
 
