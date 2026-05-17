@@ -4,7 +4,6 @@ import Login from './routes/Login'
 import Home from './routes/Home'
 import Dashboard from './routes/Dashboard';
 import './index.css'
-// 1. Import the standard Clerk control components
 import { SignedIn, SignedOut } from '@clerk/clerk-react'
 
 function App() {
