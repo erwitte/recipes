@@ -2,6 +2,7 @@ import { useState } from 'react';
 import ActionButton from '../components/ActionButton';
 import { useNavigate } from 'react-router-dom';
 import { useSignIn } from "@clerk/clerk-react";
+import { translateClerkError } from '../utils/clerkTranslations';
 import clsx from 'clsx';
 //import axios from 'axios';
 
@@ -53,7 +54,8 @@ function Home(){
             }
         } catch (err: any) {
             // Capture API errors (e.g., "Invalid password" or "User not found")
-            setClerkError(err.errors[0].message);
+            const errCode = err.errors[0].code;
+            setClerkError(translateClerkError(errCode));
         }
     };
     
@@ -68,7 +70,7 @@ function Home(){
 
             <label className="flex flex-col gap-1">
             <span>Passwort: </span>
-            <input type="text" onChange={(e) => setPassword(e.target.value)}
+            <input type="password" onChange={(e) => setPassword(e.target.value)}
             className="border border-black rounded-l"/>
             </label>
             <p className={clsx(
