@@ -3,12 +3,14 @@ import clsx from "clsx";
 import ActionButton from "../components/ActionButton";
 import { useNavigate } from "react-router-dom";
 import { useSignUp } from "@clerk/clerk-react";
+import { translateClerkError } from "../utils/clerkTranslations";
 
 function Register(){
     const [firstName, setFirstName] = useState(""); // Fixed typo
     const [emailAddress, setEmailAddress] = useState("");
     const [password, setPassword] = useState("");
     const [passwordError, setPasswordError] = useState("")
+    const [repeatedPassword, setRepeatedPassword] = useState("");
     
     // 1. Added missing states for Clerk's OTP step and error messages
     const [pendingVerification, setPendingVerification] = useState(false);
@@ -16,6 +18,8 @@ function Register(){
     const [clerkError, setClerkError] = useState("");
 
     const { isLoaded, signUp, setActive } = useSignUp();
+    const passwordsMatch = password === repeatedPassword;
+    const isFormInvalid = !firstName || !emailAddress || !password || !repeatedPassword || !passwordsMatch;
     const navigate = useNavigate();
 
     const handleSubmit = async () => {
@@ -27,7 +31,9 @@ function Register(){
             setPendingVerification(true); 
             setClerkError("");
         } catch (err: any) {
-            setClerkError(err.errors[0].message);
+            const errCode = err.errors[0].code;
+            console.log("errCode: ", errCode);
+            setClerkError(translateClerkError(errCode));
         }
     };
 
@@ -51,6 +57,7 @@ function Register(){
             setPasswordError("Passwörter nicht gleich");
         } else {
             setPasswordError("");
+            setRepeatedPassword(repeatedPassword);
         }
     }
 
@@ -86,7 +93,7 @@ function Register(){
             <input placeholder="Vorname eingeben..." type="text" onChange={(e) => setFirstName(e.target.value)}
             className="border border-black rounded-l"/>
             </label>
-
+            
             <label className="flex flex-col gap-1">
             <span>E-Mail: </span>
             <input placeholder="E-Mail eingeben..." type="text" onChange={(e) => setEmailAddress(e.target.value)}
@@ -119,7 +126,9 @@ function Register(){
             <div className="flex gap-6 justify-center">
                 <ActionButton onClick={() => navigate("/")}>Zurück</ActionButton>
                 {/* 6. Fixed function invocation execution bug */}
-                <ActionButton onClick={() => handleSubmit()}>Registrieren</ActionButton>
+                <ActionButton onClick={() => handleSubmit()}
+                    className={clsx(isFormInvalid && "opacity-50 cursor-not-allowed")}
+                >Registrieren</ActionButton>
             </div>
         </div>
     )

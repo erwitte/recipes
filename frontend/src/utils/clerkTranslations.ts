@@ -28,11 +28,11 @@ export function translateClerkError(code: string): string {
     case "form_password_validation_failed":
       return "Das Passwort entspricht nicht den Sicherheitsrichtlinien.";
 
-    case "password_too_short":
+    case "form_password_length_too_short":
       return "Das Passwort ist zu kurz. Es muss mindestens 8 Zeichen lang sein.";
 
     case "password_in_backlist":
-    case "password_pwned":
+    case "form_password_pwned":
       return "Dieses Passwort ist zu einfach oder wurde in Datenlecks gefunden. Bitte wähle ein sichereres Passwort.";
 
 
