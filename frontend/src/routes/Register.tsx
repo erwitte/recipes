@@ -6,7 +6,7 @@ import { useSignUp } from "@clerk/clerk-react";
 
 function Register(){
     const [firstName, setFirstName] = useState(""); // Fixed typo
-    const [email, setEmail] = useState("");
+    const [emailAddress, setEmailAddress] = useState("");
     const [password, setPassword] = useState("");
     const [passwordError, setPasswordError] = useState("")
     
@@ -22,7 +22,7 @@ function Register(){
         if (!isLoaded || passwordError || !password) return;
 
         try {
-            await signUp.create({ firstName, emailAddress: email, password });
+            await signUp.create({ firstName, emailAddress, password });
             await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
             setPendingVerification(true); 
             setClerkError("");
@@ -89,7 +89,7 @@ function Register(){
 
             <label className="flex flex-col gap-1">
             <span>E-Mail: </span>
-            <input placeholder="E-Mail eingeben..." type="text" onChange={(e) => setEmail(e.target.value)}
+            <input placeholder="E-Mail eingeben..." type="text" onChange={(e) => setEmailAddress(e.target.value)}
             className="border border-black rounded-l"/>
             </label>
 
