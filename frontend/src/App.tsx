@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Register from './routes/Register'
 import Login from './routes/Login'
 import Home from './routes/Home'
+import Dashboard from './routes/Dashboard';
 import './index.css'
 // 1. Import the standard Clerk control components
 import { SignedIn, SignedOut } from '@clerk/clerk-react'
@@ -41,7 +42,7 @@ function App() {
                 element={
                   <>
                   <SignedIn>
-                    <div>Welcome to your private dashboard!</div>
+                    <Dashboard />
                   </SignedIn>
                   <SignedOut>
                     <Navigate to="/" replace />
