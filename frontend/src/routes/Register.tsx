@@ -39,7 +39,7 @@ function Register(){
             const completeSignUp = await signUp.attemptEmailAddressVerification({ code });
             if (completeSignUp.status === "complete") {
                 await setActive({ session: completeSignUp.createdSessionId });
-                navigate("/"); 
+                navigate("/dashboard"); 
             }
         } catch (err: any) {
             setClerkError(err.errors[0].message);
