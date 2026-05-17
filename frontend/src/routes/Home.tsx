@@ -20,6 +20,7 @@ function Home(){
 
     return (
         <div className="w-full h-full flex flex-wrap gap-4 self-start">
+            <p>dlousfdsif</p>
             {albums.map(album => (
                 <div key={album.id}
                 className="p-4 bg-white/20 rounded-md border border-white/10">

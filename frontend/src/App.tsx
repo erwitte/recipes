@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Register from './routes/Register'
 import Login from './routes/Login'
 import Home from './routes/Home'
@@ -39,9 +39,14 @@ function App() {
               <Route 
                 path="/dashboard" 
                 element={
+                  <>
                   <SignedIn>
                     <div>Welcome to your private dashboard!</div>
                   </SignedIn>
+                  <SignedOut>
+                    <Navigate to="/" replace />
+                  </SignedOut>
+                  </>
                 }
               />
             </Routes>
