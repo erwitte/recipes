@@ -1,13 +1,13 @@
 from pydantic import BaseModel, EmailStr, Field, ConfigDict
 from typing import List, Optional
 
-class Rezept(BaseModel):
+class Recipe(BaseModel):
     titel: str = Field(..., min_length=1, max_length=255)
-    zutaten: List[str]
-    schritte: List[str]
+    ingredients: List[str]
+    steps: List[str]
 
 # DTO für die API-Antwort 
-class RezeptOut(Rezept):
+class RecipeOut(Recipe):
     id: int
     # Erlaubt Pydantic, Daten direkt aus SQLAlchemy-Objekten zu lesen
     model_config = ConfigDict(from_attributes=True)
