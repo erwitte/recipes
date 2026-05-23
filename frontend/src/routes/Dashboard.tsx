@@ -10,7 +10,9 @@ function Dashboard(){
         <>
             <SignOutButton>
                 <ActionButton onClick={() => navigate("/")}>Log Out</ActionButton>
+                <ActionButton onClick={() => {}}>New Recipe</ActionButton>
             </SignOutButton>
+
             <p>asmfposa</p>
         </>
     )
