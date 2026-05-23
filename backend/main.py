@@ -24,9 +24,9 @@ app.add_middleware(
 )
 
 @app.post("/recipe")
-def create_rezept(recipe: Recipe, db: Session = Depends(get_db)):
+def create_recipe(recipe: Recipe, db: Session = Depends(get_db)):
     try:
-        db_recipe = RecipeModel(titel=recipe.titel, ingredients=recipe.ingredients, steps=recipe.steps)
+        db_recipe = RecipeModel(title=recipe.title, ingredients=recipe.ingredients, steps=recipe.steps)
         db.add(db_recipe)
         db.commit()
         db.refresh(db_recipe)
@@ -36,21 +36,21 @@ def create_rezept(recipe: Recipe, db: Session = Depends(get_db)):
         return None
 
 @app.get("/recipe", response_model=List[RecipeOut])
-def get_all_rezepte(db: Session = Depends(get_db)):
+def get_all_recipes(db: Session = Depends(get_db)):
     try:
-        rezepte = db.query(RecipeModel).all()
-        return rezepte
+        recipes = db.query(RecipeModel).all()
+        return recipes
     except Exception as e:
         print(e)
         return None
 
-@app.get("/rezept/{id}", response_model=RecipeOut)
-def get_rezept_by_id(id: int, db: Session = Depends(get_db)):
+@app.get("/recipes/{id}", response_model=RecipeOut)
+def get_recipe_by_id(id: int, db: Session = Depends(get_db)):
     try:
-        rezept = db.query(RecipeModel).filter(RecipeModel.id == id).first()
-        if rezept is None:
-            raise HTTPException(status_code=404, detail="Rezept nicht gefunden")
-        return rezept
+        recipes = db.query(RecipeModel).filter(RecipeModel.id == id).first()
+        if recipes is None:
+            raise HTTPException(status_code=404, detail="Recipe not found")
+        return recipes
     except Exception as e:
         print(e)
         return None

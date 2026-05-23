@@ -8,7 +8,7 @@ class Recipe(Base):
     __tablename__ = 'recipes'
     
     id = Column(Integer, primary_key=True)
-    titel = Column(Text, nullable=False)
+    title = Column(Text, nullable=False)
     
     ingredients = Column(ARRAY(Text))
     steps = Column(ARRAY(Text))
