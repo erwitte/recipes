@@ -2,7 +2,7 @@ from fastapi import FastAPI, Depends
 from contextlib import asynccontextmanager
 from sqlalchemy.orm import Session
 from db.create_db import get_db, create_tables
-from db.models import Album as AlbumModel, Rezept as RezeptModel, User as UserModel
+from db.models import Recipe as RecipeModel
 from dtos import *
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -23,40 +23,26 @@ app.add_middleware(
     allow_headers=["*"],  # Allows all headers (Content-Type, Authorization, etc.)
 )
 
-@app.post("/album")
-def create_album(album: Album, db: Session = Depends(get_db)):
+@app.post("/recipe")
+def create_rezept(rezept: Rezept, db: Session = Depends(get_db)):
     try:
-        db_album = AlbumModel(title=album.title, image_url=album.image_url)
-        db.add(db_album)
+        db_rezept = RecipeModel(titel=rezept.titel, ingredients=rezept.zutaten, steps=rezept.schritte)
+        db.add(db_rezept)
         db.commit()
-        db.refresh(db_album)
-        return db_album
-    except Exception as e:
-        print(e)
-
-
-@app.get("/album", response_model=List[AlbumOut])
-def get_all_albums(db: Session = Depends(get_db)):
-    try:
-        albums = db.query(AlbumModel).all()
-        return albums
+        db.refresh(db_rezept)
+        return db_rezept
     except Exception as e:
         print(e)
         return None
 
-
-@app.post("/register", response_model=User)
-def register(user: User, db: Session = Depends(get_db)):
+@app.get("/recipe", response_model=List[RezeptOut])
+def get_all_rezepte(db: Session = Depends(get_db)):
     try:
-        db_user = UserModel(vorname=user.vorname, email=user.email)
-        db.add(db_user)
-        db.commit()
-        db.refresh(db_user)
-        return db_user
+        rezepte = db.query(RezeptModel).all()
+        return rezepte
     except Exception as e:
         print(e)
         return None
-
 
 if __name__ == "__main__":
     import uvicorn
