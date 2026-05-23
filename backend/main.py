@@ -38,7 +38,7 @@ def create_rezept(recipe: Recipe, db: Session = Depends(get_db)):
 @app.get("/recipe", response_model=List[RecipeOut])
 def get_all_rezepte(db: Session = Depends(get_db)):
     try:
-        rezepte = db.query(RezeptModel).all()
+        rezepte = db.query(RecipeModel).all()
         return rezepte
     except Exception as e:
         print(e)

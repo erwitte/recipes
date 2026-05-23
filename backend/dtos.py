@@ -13,16 +13,6 @@ class RecipeOut(Recipe):
     model_config = ConfigDict(from_attributes=True)
 
 
-class Album(BaseModel):
-    title: str = Field(..., min_length=1, max_length=255)
-    image_url: str
-
-
-class AlbumOut(Album):
-    id: int
-    
-    model_config = ConfigDict(from_attributes=True)
-
 class User(BaseModel):
     vorname: str = Field(..., min_length=1, max_length=255)
     email: EmailStr
