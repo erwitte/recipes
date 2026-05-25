@@ -1,32 +1,41 @@
 import ActionButton from "../components/ActionButton";
 import Recipe from "../components/Recipe";
 import { useNavigate } from 'react-router-dom';
-
+import axios from 'axios';
 import { SignOutButton } from "@clerk/clerk-react";
+import { useEffect, useState } from "react";
 
-const DUMMY_RECIPES = [
-    { title: "Spaghetti", ingredients: ["afsa", "wafdaf", "afdaf"], steps: ["mokfc", "mafaok", "onaf"] },
-    { title: "Lasagne" , ingredients: ["afsa", "wafdaf", "afdaf"], steps: ["mokfc", "mafaok", "onaf"]},
-    { title: "Pizza", ingredients: ["afsa", "wafdaf", "afdaf"], steps: ["mokfc", "mafaok", "onaf"]}
-];
-
-function Dashboard(){
-    const navigate = useNavigate();
-
-    return(
-        <>
-            <SignOutButton>
-                <ActionButton onClick={() => navigate("/")}>Log Out</ActionButton>
-            </SignOutButton>
-            <ActionButton onClick={() => {}}>New Recipe</ActionButton>
-
-            <div className="flex flex-col gap-4 mt-4 w-full">
-                {DUMMY_RECIPES.map((recipe) => (
-                    <Recipe title={recipe.title} ingredients={recipe.ingredients} steps={recipe.steps} />
-                ))}
-            </div>
-        </>
-    )
+interface RecipeProps {
+  title: string,
+  ingredients: string[],
+  steps: string[],
 }
 
-export default Dashboard
+function Dashboard() {
+  const navigate = useNavigate();
+  const [recipes, setRecipes] = useState<RecipeProps[]>([]);
+
+  useEffect(() => {
+    axios.get<RecipeProps[]>("http://localhost:8000/recipe")
+      .then(res => setRecipes(res.data))
+      .catch(e => console.log(e));
+  }, []);
+
+  return (
+    <>
+      <SignOutButton>
+        <ActionButton onClick={() => navigate("/")}>Log Out</ActionButton>
+      </SignOutButton>
+      <ActionButton onClick={() => {}}>New Recipe</ActionButton>
+      <div className="flex flex-col gap-4 mt-4 w-full">
+        {recipes.map((r, i) => (
+          <div key={i} className="w-full border-b pb-2 last:border-0">
+            <Recipe title={r.title} ingredients={r.ingredients} steps={r.steps} />
+          </div>
+        ))}
+      </div>
+    </>
+  );
+}
+
+export default Dashboard;
