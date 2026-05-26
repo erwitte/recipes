@@ -26,7 +26,7 @@ function Dashboard() {
       <SignOutButton>
         <ActionButton onClick={() => navigate("/")}>Log Out</ActionButton>
       </SignOutButton>
-      <ActionButton onClick={() => {}}>New Recipe</ActionButton>
+      <ActionButton onClick={() => {navigate("/newRecipe")}}>New Recipe</ActionButton>
       <div className="flex flex-col gap-4 mt-4 w-full">
         {recipes.map((r, i) => (
           <div key={i} className="w-full border-b pb-2 last:border-0">

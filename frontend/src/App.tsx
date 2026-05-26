@@ -5,6 +5,7 @@ import Home from './routes/Home'
 import Dashboard from './routes/Dashboard';
 import './index.css'
 import { SignedIn, SignedOut } from '@clerk/clerk-react'
+import NewRecipe from './routes/NewRecipe';
 
 function App() {
   return (
@@ -46,6 +47,17 @@ function App() {
                   <SignedOut>
                     <Navigate to="/" replace />
                   </SignedOut>
+                  </>
+                }
+              />
+
+              <Route
+                path="/newRecipe"
+                element={
+                  <>
+                    <SignedIn>
+                      <NewRecipe />
+                    </SignedIn>
                   </>
                 }
               />
